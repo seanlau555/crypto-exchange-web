@@ -6,7 +6,7 @@ import { Flex, Button, Input } from '@chakra-ui/react'
 import Sidebar from './Sidebar'
 import styled from '@emotion/styled'
 import { InputEvent } from '../types'
-import { useGetCurrencyBars } from '../services'
+import { useGetCurrencyBars, useGetCurrencySubscription } from '../services'
 
 function Dashboard() {
   const [inputValue, setInputValue] = useState<string>('')
@@ -14,6 +14,8 @@ function Dashboard() {
   const [timeframe, setTimeframe] = useState<string>('1Day')
   const token = window.localStorage.getItem('auth-token') || ''
   const { data } = useGetCurrencyBars(symbol, timeframe, token)
+
+  useGetCurrencySubscription(symbol, token)
 
   const handleChange = (evt: InputEvent) => {
     setInputValue(evt.target.value)

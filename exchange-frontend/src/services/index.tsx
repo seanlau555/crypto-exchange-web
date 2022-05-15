@@ -1,6 +1,14 @@
+import React from 'react'
 import axios from 'axios'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import Utils from '../Utils'
+// import Alpaca from '@alpacahq/alpaca-trade-api'
+
+// const alpaca = new Alpaca({
+//   keyId: import.meta.env.VITE_REACT_APP_CLIENT_ID,
+//   secretKey: import.meta.env.VITE_REACT_APP_CLIENT_SECRET,
+//   paper: true,
+// })
 
 export function useGetCurrencyBars(
   symbol: string,
@@ -55,4 +63,48 @@ export function useGetLatestPrice(target: string, base: string) {
       refetchOnWindowFocus: true,
     },
   )
+}
+
+export const useGetCurrencySubscription = (symbol, token) => {
+  const queryClient = useQueryClient()
+
+  React.useEffect(() => {
+    // const websocket = alpaca.data_stream_v2
+    const websocket = new WebSocket(
+      `wss://stream.data.alpaca.markets/v1beta1/crypto`,
+    )
+    websocket.onopen = () => {
+      console.log('connected')
+      const authMessage = {
+        action: 'auth',
+        key: import.meta.env.VITE_REACT_APP_CLIENT_ID,
+        secret: import.meta.env.VITE_REACT_APP_CLIENT_SECRET,
+      }
+      console.log(authMessage)
+      websocket.send(JSON.stringify(authMessage))
+
+      const message = {
+        action: 'subscribe',
+        trades: ['BTCUSD'],
+        quotes: ['BTCUSD', 'LTCUSD'],
+        bars: ['*'],
+      }
+      // websocket.send(JSON.stringify(message))
+      // socket.subscribeForQuotes(['AAPL'])
+    }
+    websocket.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      console.log(data)
+      // queryClient.setQueriesData(data.entity, (oldData) => {
+      //   const update = (entity) =>
+      //     entity.id === data.id ? { ...entity, ...data.payload } : entity
+      //   return Array.isArray(oldData) ? oldData.map(update) : update(oldData)
+      // })
+    }
+
+    return () => {
+      // websocket.disconnect()
+      websocket.close()
+    }
+  }, [queryClient])
 }
