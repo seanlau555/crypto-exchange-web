@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CandleStickChart from './Chart'
 import Timeframe from './Timeframe'
-import axios from 'axios'
 import Utils from '../Utils'
-import initialData from './Chart/initial-data.json'
 import { Flex, Button, Input } from '@chakra-ui/react'
 import Sidebar from './Sidebar'
 import styled from '@emotion/styled'
@@ -14,43 +12,11 @@ function Dashboard() {
   const [inputValue, setInputValue] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('BTCUSD')
   const [timeframe, setTimeframe] = useState<string>('1Day')
-  const [chartData, setChartData] = useState(initialData)
   const token = window.localStorage.getItem('auth-token') || ''
   const { data } = useGetCurrencyBars(symbol, timeframe, token)
 
-  // useEffect(() => {
-  //   getBars(window.localStorage.getItem('auth-token'))
-  // }, [symbol, timeframe])
-
   const handleChange = (evt: InputEvent) => {
     setInputValue(evt.target.value)
-  }
-
-  const getBars = async (_auth_token: { _auth_token: string }) => {
-    var start = new Date()
-    start.setFullYear(start.getFullYear() - 1)
-
-    const response = await axios.get(
-      // `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
-      `https://data.alpaca.markets/v1beta1/crypto/${symbol}/bars`,
-      {
-        headers: {
-          Authorization: `Bearer ${_auth_token}`,
-        },
-        params: {
-          start: start.toISOString(),
-          // end: end.toISOString(),
-          timeframe,
-        },
-      },
-    )
-
-    if (response.data.bars === null) {
-      return
-    }
-
-    const parsedData = Utils.parseResponse(response)
-    setChartData(parsedData)
   }
 
   const handleSubmit = async (e) => {
@@ -62,7 +28,6 @@ function Dashboard() {
       window.localStorage.setItem('auth-token', auth_token)
     }
     setSymbol(inputValue)
-    getBars(window.localStorage.getItem('auth-token'))
   }
 
   const onChangeTimeframe = (value: string) => {

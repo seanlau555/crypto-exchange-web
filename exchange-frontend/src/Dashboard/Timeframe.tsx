@@ -18,6 +18,7 @@ function Timeframe({ onChange, currentTimeframe }: Props) {
     <Flex>
       {availableTimeframe.map((x) => (
         <Button
+          key={x}
           colorScheme={currentTimeframe === x ? 'teal' : 'gray'}
           onClick={(evt) => onClick(x, evt)}
         >

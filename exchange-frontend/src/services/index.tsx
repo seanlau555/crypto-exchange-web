@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
+import Utils from '../Utils'
 
 export function useGetCurrencyBars(
   symbol: string,
@@ -11,7 +12,7 @@ export function useGetCurrencyBars(
     async () => {
       var start = new Date()
       start.setFullYear(start.getFullYear() - 1)
-      const { data } = await axios.get(
+      const response = await axios.get(
         // `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
         `https://data.alpaca.markets/v1beta1/crypto/${symbol}/bars`,
         {
@@ -25,9 +26,11 @@ export function useGetCurrencyBars(
           },
         },
       )
-      return data
+      const parsedData = Utils.parseResponse(response)
+      return parsedData
     },
     {
+      initialData: [],
       refetchOnWindowFocus: false,
     },
   )
