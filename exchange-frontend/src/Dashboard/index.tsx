@@ -1,19 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CandleStickChart from './Chart'
 import Timeframe from './Timeframe'
-import Utils from '../Utils'
+import Utils from '../utils'
 import { Flex, Button, Input } from '@chakra-ui/react'
 import Sidebar from './Sidebar'
 import styled from '@emotion/styled'
 import { InputEvent } from '../types'
 import { useGetCurrencyBars } from '../services'
 
+const intervalMs = 1000 * 60
+
 function Dashboard() {
   const [inputValue, setInputValue] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('BTCUSD')
   const [timeframe, setTimeframe] = useState<string>('1Day')
   const token = window.localStorage.getItem('auth-token') || ''
-  const { data } = useGetCurrencyBars(symbol, timeframe, token)
+  const { data, refetch } = useGetCurrencyBars(symbol, timeframe, token)
+
+  useEffect(function () {
+    const id = setTimeout(function () {
+      refetch()
+    }, intervalMs)
+    return function () {
+      clearTimeout(id)
+    }
+  }, [])
 
   const handleChange = (evt: InputEvent) => {
     setInputValue(evt.target.value)
