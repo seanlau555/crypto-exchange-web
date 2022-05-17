@@ -10,8 +10,12 @@ export function useGetCurrencyBars(
   return useQuery(
     ['cryptos', symbol, timeframe],
     async () => {
-      var start = new Date()
-      start.setFullYear(start.getFullYear() - 1)
+      const start = new Date()
+      const end = new Date()
+      if (timeframe === '1Min') start.setDate(start.getDate() - 2)
+      else if (timeframe === '15Min') start.setDate(start.getDate() - 7)
+      else if (timeframe === '1Hour') start.setDate(start.getDate() - 14)
+      else start.setFullYear(start.getFullYear() - 1)
       const response = await axios.get(
         // `https://data.alpaca.markets/v2/stocks/${symbol}/bars`,
         `https://data.alpaca.markets/v1beta1/crypto/${symbol}/bars`,
@@ -21,7 +25,7 @@ export function useGetCurrencyBars(
           },
           params: {
             start: start.toISOString(),
-            // end: end.toISOString(),
+            end: end.toISOString(),
             timeframe,
           },
         },

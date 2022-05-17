@@ -53,6 +53,7 @@ function Sidebar({ selectedTicker, onSelect }: Props) {
       <Box
         transition=".4s ease"
         w="300px"
+        minW="300px"
         borderColor="gray.100"
         borderRightWidth="1px"
         overflowY="scroll"
