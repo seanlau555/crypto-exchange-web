@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CandleStickChart from './Chart'
 import Timeframe from './Timeframe'
 import Utils from '../utils'
@@ -8,23 +8,12 @@ import styled from '@emotion/styled'
 import { InputEvent } from '../types'
 import { useGetCurrencyBars } from '../services'
 
-const intervalMs = 1000 * 60
-
 function Dashboard() {
   const [inputValue, setInputValue] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('BTCUSD')
   const [timeframe, setTimeframe] = useState<string>('1Day')
   const token = window.localStorage.getItem('auth-token') || ''
-  const { data, refetch } = useGetCurrencyBars(symbol, timeframe, token)
-
-  useEffect(function () {
-    const id = setTimeout(function () {
-      refetch()
-    }, intervalMs)
-    return function () {
-      clearTimeout(id)
-    }
-  }, [])
+  const { data } = useGetCurrencyBars(symbol, timeframe, token)
 
   const handleChange = (evt: InputEvent) => {
     setInputValue(evt.target.value)
@@ -46,7 +35,7 @@ function Dashboard() {
   }
 
   return (
-    <Flex bg="#fef7d0" height="100vh">
+    <Flex height="100vh">
       <Sidebar selectedTicker={symbol} onSelect={setSymbol} />
       <div>
         <Flex>

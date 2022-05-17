@@ -31,6 +31,7 @@ export function useGetCurrencyBars(
     },
     {
       initialData: [],
+      refetchInterval: 1000 * 60,
       refetchOnWindowFocus: false,
     },
   )
@@ -41,8 +42,8 @@ export function useGetLatestPrice(target: string, base: string) {
     ['crypto', target, base],
     async () => {
       const { data } = await axios.get(
-        `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD`,
-        // `https://min-api.cryptocompare.com/data/price?fsym=${target}&tsyms=${base}`,
+        // `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD`,
+        `https://min-api.cryptocompare.com/data/price?fsym=${target}&tsyms=${base}`,
         {
           headers: {
             'Content-type': 'application/json',
@@ -52,7 +53,8 @@ export function useGetLatestPrice(target: string, base: string) {
       return data ? data[base] : ''
     },
     {
-      refetchOnWindowFocus: true,
+      refetchInterval: 1000 * 60,
+      refetchOnWindowFocus: false,
     },
   )
 }
