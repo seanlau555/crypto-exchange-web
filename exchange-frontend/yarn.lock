@@ -2901,7 +2901,7 @@ react-fast-compare@3.2.0:
 
 react-financial-charts@^1.3.2:
   version "1.3.2"
-  resolved "https://registry.npmjs.org/react-financial-charts/-/react-financial-charts-1.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-financial-charts/-/react-financial-charts-1.3.2.tgz#474b53918f676064dfef73c253677982ba64aa53"
   integrity sha512-gBPdasfCI0H8fV3vij7zTkQME/uOz3V9AOKTO3il4V/w8emA8fc6TuCHG4ZHZF5fcw3sBs71qeeCzpJsxbgfnw==
   dependencies:
     "@react-financial-charts/annotations" "^1.3.1"

@@ -1,0 +1,141 @@
+// Vitest Snapshot v1
+
+exports[`<Dashboard /> > render dashbard page 1`] = `
+<div>
+  <div
+    class="css-1yeiifd"
+  >
+    <div
+      class="css-1hn0ibo"
+    >
+      <div
+        class="css-1j9jo68"
+        id="BTCUSD"
+      >
+        BTCUSD
+        , 
+        Price: USD undefined
+      </div>
+      <div
+        class="css-bhtpg9"
+        id="ETHUSD"
+      >
+        ETHUSD
+        , 
+        Price: USD undefined
+      </div>
+      <div
+        class="css-bhtpg9"
+        id="SOLUSD"
+      >
+        SOLUSD
+        , 
+        Price: USD undefined
+      </div>
+      <div
+        class="css-bhtpg9"
+        id="DOGEUSD"
+      >
+        DOGEUSD
+        , 
+        Price: USD undefined
+      </div>
+      <div
+        class="css-bhtpg9"
+        id="AVAXUSD"
+      >
+        AVAXUSD
+        , 
+        Price: USD undefined
+      </div>
+      <div
+        class="css-bhtpg9"
+        id="SANDUSD"
+      >
+        SANDUSD
+        , 
+        Price: USD undefined
+      </div>
+    </div>
+    <div>
+      <div
+        class="css-k008qs"
+      >
+        <form
+          class="css-1qhrdhp"
+        >
+          <label>
+            Symbol:
+            <input
+              class="chakra-input css-fmnpk6"
+              type="text"
+            />
+          </label>
+          <button
+            class="chakra-button css-13fg2ty"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+        <div
+          class="css-k008qs"
+        >
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            1Min
+          </button>
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            15Min
+          </button>
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            1Hour
+          </button>
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            1Day
+          </button>
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            1Week
+          </button>
+          <button
+            class="chakra-button css-5c2176"
+            type="button"
+          >
+            1Month
+          </button>
+        </div>
+      </div>
+      <div
+        class="chart"
+      >
+        <label
+          class="chart-symbol"
+        >
+          Current Symbol: 
+          <b>
+             
+            BTCUSD
+             
+          </b>
+           
+        </label>
+        <div />
+      </div>
+    </div>
+  </div>
+</div>
+`;

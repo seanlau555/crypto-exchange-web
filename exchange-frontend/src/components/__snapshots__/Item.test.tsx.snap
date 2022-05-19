@@ -1,0 +1,15 @@
+// Vitest Snapshot v1
+
+exports[`<Item /> > render Item 1`] = `
+<div>
+  <div
+    class="css-1j9jo68"
+    data-testid="BTCUSD"
+    id="BTCUSD"
+  >
+    BTCUSD
+    , 
+    Price: USD undefined
+  </div>
+</div>
+`;

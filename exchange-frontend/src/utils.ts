@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { Bar } from './types'
 
 const Utils = {
-  async getAuthToken(oauth_code) {
+  async getAuthToken(oauth_code: string) {
     // returns Authorization Token once we have our OAuth token
     const body = {
       grant_type: 'authorization_code',
@@ -27,6 +27,7 @@ const Utils = {
     })
 
     const { data } = response
+    window.localStorage.setItem('auth-token', data)
     return data.access_token
   },
 
