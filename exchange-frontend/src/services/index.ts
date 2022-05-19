@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import Utils from '../utils'
-import { Bar } from '../types'
 
 export function useGetCurrencyBars(
   symbol: string,
@@ -27,6 +26,7 @@ export function useGetCurrencyBars(
           params: {
             start: start.toISOString(),
             end: end.toISOString(),
+            exchanges: 'FTXU',
             timeframe,
           },
         },
@@ -36,6 +36,7 @@ export function useGetCurrencyBars(
     },
     {
       initialData: [],
+      enabled: !!(token && symbol),
       refetchInterval: 1000 * 60,
       refetchOnWindowFocus: false,
     },

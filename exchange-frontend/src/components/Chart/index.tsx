@@ -57,7 +57,7 @@ const CandleStickChart = ({ inputData }: { inputData: Array<Bar> | [] }) => {
   const gridHeight = height - margin.top - margin.bottom
 
   const barChartHeight = gridHeight / 4
-  const barChartOrigin = (_, h: any) => [0, h - barChartHeight]
+  const barChartOrigin = (_: any, h: any) => [0, h - barChartHeight]
   const chartHeight = gridHeight
 
   const dateTimeFormat = '%d %b'

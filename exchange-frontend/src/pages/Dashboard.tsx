@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CandleStickChart from '../components/Chart'
 import Timeframe from '../components/Timeframe'
 import Utils from '../utils'
@@ -7,13 +7,33 @@ import Sidebar from '../components/Sidebar'
 import styled from '@emotion/styled'
 import { InputEvent, FormEvent } from '../types'
 import { useGetCurrencyBars } from '../services'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
   const [inputValue, setInputValue] = useState<string>('')
-  const [symbol, setSymbol] = useState<string>('BTCUSD')
+  const [symbol, setSymbol] = useState<string>('')
   const [timeframe, setTimeframe] = useState<string>('1Day')
   const token = window.localStorage.getItem('auth-token') || ''
-  const { data } = useGetCurrencyBars(symbol, timeframe, token)
+  const { data, refetch } = useGetCurrencyBars(symbol, timeframe, token)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function getToken() {
+      if (window.localStorage.getItem('auth-token') === null) {
+        const oauth_code = new URLSearchParams(window.location.search).get(
+          'code',
+        )
+        if (oauth_code) {
+          const auth_token = await Utils.getAuthToken(oauth_code)
+          window.localStorage.setItem('auth-token', auth_token)
+          refetch()
+        } else {
+          navigate('/')
+        }
+      }
+    }
+    getToken()
+  }, [])
 
   const handleChange = (evt: InputEvent) => {
     setInputValue(evt.target.value)
