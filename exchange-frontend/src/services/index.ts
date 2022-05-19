@@ -26,6 +26,7 @@ export function useGetCurrencyBars(
           params: {
             start: start.toISOString(),
             end: end.toISOString(),
+            exchanges: 'FTXU',
             timeframe,
           },
         },
