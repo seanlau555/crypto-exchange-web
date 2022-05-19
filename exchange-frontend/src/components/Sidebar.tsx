@@ -35,16 +35,15 @@ function Sidebar({ selectedTicker, onSelect }: Props) {
         bg="white"
         h="100vh"
       >
-        {selectedTicker &&
-          currencies.map((x: { current: string; to: string }) => (
-            <Item
-              key={x.current + x.to}
-              current={x.current}
-              to={x.to}
-              selectedTicker={selectedTicker}
-              onClick={onClick}
-            />
-          ))}
+        {currencies.map((x: { current: string; to: string }) => (
+          <Item
+            key={x.current + x.to}
+            current={x.current}
+            to={x.to}
+            selectedTicker={selectedTicker}
+            onClick={onClick}
+          />
+        ))}
       </Box>
     </>
   )

@@ -35,6 +35,7 @@ export function useGetCurrencyBars(
     },
     {
       initialData: [],
+      enabled: !!(token && symbol),
       refetchInterval: 1000 * 60,
       refetchOnWindowFocus: false,
     },
