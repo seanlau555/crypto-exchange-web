@@ -13,7 +13,7 @@ const Utils = {
     }
     // encode data into form encoding
     const encodedBody = Object.keys(body)
-      .map((key) => `${key}=${encodeURIComponent(body[key])}`)
+      .map((key: string) => `${key}=${encodeURIComponent(body[key])}`)
       .join('&')
     console.log(body)
     // submit POST request
