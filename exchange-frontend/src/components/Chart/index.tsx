@@ -23,7 +23,7 @@ import {
 } from 'react-financial-charts'
 import { Bar } from '../../types'
 
-const CandleStickChart = ({ data: inputData }: { data: Array<Bar> }) => {
+const CandleStickChart = ({ inputData }: { inputData: Array<Bar> | [] }) => {
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date),
@@ -35,18 +35,18 @@ const CandleStickChart = ({ data: inputData }: { data: Array<Bar> }) => {
   const ema12 = ema()
     .id(1)
     .options({ windowSize: 12 })
-    .merge((d, c) => {
+    .merge((d: any, c: any) => {
       d.ema12 = c
     })
-    .accessor((d) => d.ema12)
+    .accessor((d: any) => d.ema12)
 
   const ema26 = ema()
     .id(2)
     .options({ windowSize: 26 })
-    .merge((d, c) => {
+    .merge((d: any, c: any) => {
       d.ema26 = c
     })
-    .accessor((d) => d.ema26)
+    .accessor((d: any) => d.ema26)
 
   const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(inputData)
   const pricesDisplayFormat = format('.2f')
@@ -57,7 +57,7 @@ const CandleStickChart = ({ data: inputData }: { data: Array<Bar> }) => {
   const gridHeight = height - margin.top - margin.bottom
 
   const barChartHeight = gridHeight / 4
-  const barChartOrigin = (_, h) => [0, h - barChartHeight]
+  const barChartOrigin = (_, h: any) => [0, h - barChartHeight]
   const chartHeight = gridHeight
 
   const dateTimeFormat = '%d %b'

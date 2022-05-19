@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { Bar } from './types'
 
 const Utils = {
   async getAuthToken(oauth_code) {
@@ -29,10 +30,10 @@ const Utils = {
     return data.access_token
   },
 
-  parseResponse(response) {
+  parseResponse(response: AxiosResponse): Array<Bar> | [] {
     const { bars } = response.data
-    const data = []
     if (bars) {
+      const data = []
       for (let i = 0; i < bars.length; i++) {
         const bar = bars[i]
         const point = {
@@ -45,8 +46,9 @@ const Utils = {
         }
         data.push(point)
       }
+      return data
     }
-    return data
+    return []
   },
 }
 export default Utils

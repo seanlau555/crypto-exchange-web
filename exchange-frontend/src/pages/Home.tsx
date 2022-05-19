@@ -1,5 +1,5 @@
 import { Text, Button, Flex, Box, Heading, Container } from '@chakra-ui/react'
-import { ButtonEvent } from './types'
+import { ButtonEvent } from '../types'
 
 function Home() {
   const handleSubmit = async (evt: ButtonEvent) => {

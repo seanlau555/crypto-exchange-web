@@ -5,7 +5,7 @@ import Utils from '../utils'
 import { Flex, Button, Input } from '@chakra-ui/react'
 import Sidebar from '../components/Sidebar'
 import styled from '@emotion/styled'
-import { InputEvent } from '../types'
+import { InputEvent, FormEvent } from '../types'
 import { useGetCurrencyBars } from '../services'
 
 function Dashboard() {
@@ -19,14 +19,8 @@ function Dashboard() {
     setInputValue(evt.target.value)
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
-    if (window.localStorage.getItem('auth-token') === null) {
-      var oauth_code = new URLSearchParams(window.location.search).get('code')
-      const auth_token = await Utils.getAuthToken(oauth_code)
-      window.localStorage.setItem('auth-token', auth_token)
-    }
     setSymbol(inputValue)
   }
 
@@ -58,12 +52,14 @@ function Dashboard() {
             onChange={onChangeTimeframe}
           />
         </Flex>
-        <div className="chart">
-          <label className="chart-symbol">
-            Current Symbol: <b> {symbol.toUpperCase()} </b>{' '}
-          </label>
-          <CandleStickChart data={data} />
-        </div>
+        {data && (
+          <div className="chart">
+            <label className="chart-symbol">
+              Current Symbol: <b> {symbol.toUpperCase()} </b>{' '}
+            </label>
+            <CandleStickChart inputData={data} />
+          </div>
+        )}
       </div>
     </Flex>
   )

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import Utils from '../utils'
+import { Bar } from '../types'
 
 export function useGetCurrencyBars(
   symbol: string,

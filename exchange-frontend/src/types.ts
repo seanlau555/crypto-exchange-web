@@ -1,5 +1,5 @@
 export type Bar = {
-  data: number
+  date: string
   open: number
   low: number
   high: number
@@ -12,3 +12,5 @@ export type ButtonEvent = React.MouseEvent<HTMLButtonElement>
 export type InputEvent = React.ChangeEvent<HTMLInputElement>
 
 export type DivEvent = React.MouseEvent<HTMLDivElement>
+
+export type FormEvent = React.FormEvent<HTMLFormElement>
