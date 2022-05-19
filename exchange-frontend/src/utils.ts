@@ -32,17 +32,19 @@ const Utils = {
   parseResponse(response) {
     const { bars } = response.data
     const data = []
-    for (let i = 0; i < bars.length; i++) {
-      const bar = bars[i]
-      const point = {
-        date: bar.t,
-        open: bar.o,
-        low: bar.l,
-        high: bar.h,
-        close: bar.c,
-        volume: bar.v,
+    if (bars) {
+      for (let i = 0; i < bars.length; i++) {
+        const bar = bars[i]
+        const point = {
+          date: bar.t,
+          open: bar.o,
+          low: bar.l,
+          high: bar.h,
+          close: bar.c,
+          volume: bar.v,
+        }
+        data.push(point)
       }
-      data.push(point)
     }
     return data
   },

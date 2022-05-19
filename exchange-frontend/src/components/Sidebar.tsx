@@ -3,7 +3,8 @@ import { Box } from '@chakra-ui/react'
 import { DivEvent } from '../types'
 import { useGetLatestPrice } from '../services'
 
-const list = ['BTCUSD', 'ETHUSD', 'SOLUSD', 'BTCEUR', 'ETHEUR', 'SOLEUR']
+const list = ['BTC', 'ETH', 'SOL', 'DOGE', 'AVAX', 'SAND']
+const bases = ['USD']
 
 type Props = {
   onSelect: (value: string) => void
@@ -11,17 +12,19 @@ type Props = {
 }
 
 function Item({
-  currency,
+  current,
+  to,
   selectedTicker,
   onClick,
 }: {
-  currency: string
+  current: string
+  to: string
   selectedTicker: string
   onClick: (evt: DivEvent) => void
 }) {
-  const base = currency.slice(3, 6)
-  const { data } = useGetLatestPrice(currency.slice(0, 3), currency.slice(3, 6))
-  const price = `Price: ${base} ${data}`
+  const { data } = useGetLatestPrice(current, to)
+  const price = `Price: ${to} ${data}`
+  const exchange = current + to
 
   return (
     <Box
@@ -29,16 +32,16 @@ function Item({
       cursor="pointer"
       padding="4px 16px"
       borderWidth="2px"
-      borderColor={selectedTicker === currency ? 'teal.100' : 'white'}
-      fontWeight={selectedTicker === currency ? '600' : '500'}
-      background={selectedTicker === currency ? 'teal.50' : 'white'}
-      color={selectedTicker === currency ? 'teal.700' : 'gray.700'}
+      borderColor={selectedTicker === exchange ? 'teal.100' : 'white'}
+      fontWeight={selectedTicker === exchange ? '600' : '500'}
+      background={selectedTicker === exchange ? 'teal.50' : 'white'}
+      color={selectedTicker === exchange ? 'teal.700' : 'gray.700'}
       borderRadius="0px"
       onClick={onClick}
-      id={currency}
+      id={exchange}
       fontSize="sm"
     >
-      {currency}, {price}
+      {exchange}, {price}
     </Box>
   )
 }
@@ -47,6 +50,13 @@ function Sidebar({ selectedTicker, onSelect }: Props) {
   const onClick = (evt: DivEvent) => {
     onSelect(evt.currentTarget.id)
   }
+  const currencies = list
+    .map((x) => {
+      return bases.map((y) => {
+        return { current: x, to: y }
+      })
+    })
+    .flat()
 
   return (
     <>
@@ -60,10 +70,11 @@ function Sidebar({ selectedTicker, onSelect }: Props) {
         bg="white"
         h="100vh"
       >
-        {list.map((x: string) => (
+        {currencies.map((x: { current: string; to: string }) => (
           <Item
-            key={x}
-            currency={x}
+            key={x.current + x.to}
+            current={x.current}
+            to={x.to}
             selectedTicker={selectedTicker}
             onClick={onClick}
           />
