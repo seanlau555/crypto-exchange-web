@@ -1,11 +1,13 @@
 import { Text, Button, Flex, Box, Heading, Container } from '@chakra-ui/react'
 import { ButtonEvent } from '../types'
 
+export const alpacaAuthUrl = 'https://app.alpaca.markets/oauth/authorize'
+
 function Home() {
   const handleSubmit = async (evt: ButtonEvent) => {
     evt.preventDefault()
     const alpaca_oauth =
-      `https://app.alpaca.markets/oauth/authorize` +
+      alpacaAuthUrl +
       `?response_type=code&client_id=${
         import.meta.env.VITE_REACT_APP_CLIENT_ID
       }&redirect_uri=${
@@ -24,7 +26,11 @@ function Home() {
       >
         <Heading> My OAuth Trading App</Heading>
         <Box mt="10px">
-          <Button colorScheme="teal" onClick={handleSubmit}>
+          <Button
+            data-testid="signin"
+            colorScheme="teal"
+            onClick={handleSubmit}
+          >
             Sign in with Alpaca
           </Button>
         </Box>

@@ -1,0 +1,39 @@
+// Vitest Snapshot v1
+
+exports[`<Home /> > render home page 1`] = `
+<div>
+  <div
+    class="chakra-container css-12irvte"
+  >
+    <div
+      class="css-1d7sxvi"
+    >
+      <h2
+        class="chakra-heading css-0"
+      >
+         My OAuth Trading App
+      </h2>
+      <div
+        class="css-1q7njkh"
+      >
+        <button
+          class="chakra-button css-5c2176"
+          data-testid="signin"
+          type="button"
+        >
+          Sign in with Alpaca
+        </button>
+      </div>
+      <div
+        class="css-1q7njkh"
+      >
+        <p
+          class="chakra-text css-in3yi3"
+        >
+           Powered by Alpaca 
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
