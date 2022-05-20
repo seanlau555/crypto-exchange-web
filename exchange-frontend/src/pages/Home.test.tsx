@@ -1,17 +1,19 @@
 import { describe, expect, it } from 'vitest'
-import Home, { alpacaAuthUrl } from './Home'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import Home from './Home'
+import { screen, render, fireEvent } from '@testing-library/react'
 
 describe('<Home />', () => {
   it('render home page', () => {
     const { container } = render(<Home />)
-    expect(container).toMatchSnapshot()
+    expect(container).toHaveTextContent('My OAuth Trading App')
   })
 
-  // it('click sign in button', () => {
-  //   render(<Home />)
-  //   userEvent.click(screen.getByTestId('signin'))
-  //   expect(document.location.href).toEqual(alpacaAuthUrl)
-  // })
+  it('should able to click submit button', () => {
+    render(<Home />)
+    const buttonElement = screen.getByRole('button', {
+      name: /Sign in with Alpaca/i,
+    })
+    fireEvent.click(buttonElement)
+    expect(window.location.href).toEqual('http://localhost:3000/')
+  })
 })

@@ -24,7 +24,7 @@ function Home() {
         direction="column"
         mt={{ base: 8 }}
       >
-        <Heading> My OAuth Trading App</Heading>
+        <Heading>My OAuth Trading App</Heading>
         <Box mt="10px">
           <Button
             data-testid="signin"
@@ -35,7 +35,7 @@ function Home() {
           </Button>
         </Box>
         <Box mt="10px">
-          <Text fontWeight="bold"> Powered by Alpaca </Text>
+          <Text fontWeight="bold">Powered by Alpaca </Text>
         </Box>
       </Flex>
     </Container>

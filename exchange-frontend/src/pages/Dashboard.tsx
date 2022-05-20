@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import CandleStickChart from '../components/Chart'
 import Timeframe from '../components/Timeframe'
-import Utils from '../utils'
+import { getAuthToken } from '../utils'
 import { Flex } from '@chakra-ui/react'
 import Sidebar from '../components/Sidebar'
 import InputBar from '../components/InputBar'
@@ -24,7 +24,7 @@ function Dashboard() {
           'code',
         )
         if (oauth_code) {
-          const auth_token = await Utils.getAuthToken(oauth_code)
+          const auth_token = await getAuthToken(oauth_code)
           window.localStorage.setItem('auth-token', auth_token)
           refetch()
         } else {

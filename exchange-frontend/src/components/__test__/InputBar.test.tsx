@@ -11,7 +11,9 @@ describe('InputBar', () => {
 
   it('should be able to type in input', () => {
     render(<InputBar onSubmit={() => {}} />)
-    const inputElement = screen.getByPlaceholderText(/Input ticker.../i)
+    const inputElement = screen.getByPlaceholderText(
+      /Input ticker.../i,
+    ) as HTMLInputElement
     fireEvent.change(inputElement, { target: { value: 'BTCUSD' } })
     expect(inputElement.value).toBe('BTCUSD')
   })

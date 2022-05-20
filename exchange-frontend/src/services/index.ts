@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
-import Utils from '../utils'
+import { parseResponse } from '../utils'
 
 export function useGetCurrencyBars(
   symbol: string,
@@ -31,7 +31,7 @@ export function useGetCurrencyBars(
           },
         },
       )
-      const parsedData = Utils.parseResponse(response)
+      const parsedData = parseResponse(response)
       return parsedData
     },
     {
