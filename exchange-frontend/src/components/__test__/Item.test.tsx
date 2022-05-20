@@ -3,7 +3,7 @@ import Item from '../Item'
 import { createWrapper } from '../../test/utils'
 
 describe('<Item />', () => {
-  it('render Item', () => {
+  it('render item', () => {
     const { container } = createWrapper(
       <Item
         current={'BTC'}
@@ -12,6 +12,6 @@ describe('<Item />', () => {
         onClick={() => {}}
       />,
     )
-    expect(container).toMatchSnapshot()
+    expect(container).toBeInTheDocument()
   })
 })

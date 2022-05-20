@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 import CandleStickChart from '../components/Chart'
 import Timeframe from '../components/Timeframe'
 import Utils from '../utils'
-import { Flex, Button, Input } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import Sidebar from '../components/Sidebar'
-import styled from '@emotion/styled'
-import { InputEvent, FormEvent } from '../types'
+import InputBar from '../components/InputBar'
 import { useGetCurrencyBars } from '../services'
 import { useNavigate } from 'react-router-dom'
 
+const defaultTimeframe = '1Day'
+
 function Dashboard() {
-  const [inputValue, setInputValue] = useState<string>('')
   const [symbol, setSymbol] = useState<string>('')
-  const [timeframe, setTimeframe] = useState<string>('1Day')
+  const [timeframe, setTimeframe] = useState<string>(defaultTimeframe)
   const token = window.localStorage.getItem('auth-token') || ''
   const { data, refetch } = useGetCurrencyBars(symbol, timeframe, token)
   const navigate = useNavigate()
@@ -35,13 +35,8 @@ function Dashboard() {
     getToken()
   }, [])
 
-  const handleChange = (evt: InputEvent) => {
-    setInputValue(evt.target.value)
-  }
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setSymbol(inputValue)
+  const handleSubmit = (value: string) => {
+    setSymbol(value)
   }
 
   const onChangeTimeframe = (value: string) => {
@@ -53,22 +48,9 @@ function Dashboard() {
       <Sidebar selectedTicker={symbol} onSelect={setSymbol} />
       <div>
         <Flex>
-          <StyledForm onSubmit={handleSubmit}>
-            <label>
-              Symbol:
-              <Input
-                bg="white"
-                textTransform="uppercase"
-                type="text"
-                onChange={handleChange}
-              />
-            </label>
-            <Button type="submit" colorScheme="teal" ml="8px">
-              Submit
-            </Button>
-          </StyledForm>
+          <InputBar onSubmit={handleSubmit} />
           <Timeframe
-            currentTimeframe={timeframe}
+            defaultTimeframe={defaultTimeframe}
             onChange={onChangeTimeframe}
           />
         </Flex>
@@ -86,15 +68,3 @@ function Dashboard() {
 }
 
 export default Dashboard
-
-const StyledForm = styled.form`
-  display: flex;
-  width: 400px;
-  label {
-    display: flex;
-    align-items: center;
-    input {
-      margin-left: 8px;
-    }
-  }
-`
