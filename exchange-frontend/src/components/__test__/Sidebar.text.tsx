@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import Sidebar from './Sidebar'
+import Sidebar from '../Sidebar'
 import { screen, fireEvent } from '@testing-library/react'
-import { createWrapper } from '../test/utils'
+import { createWrapper } from '../../test/utils'
 
 describe('<Sidebar />', () => {
   it('render sidebar', () => {
