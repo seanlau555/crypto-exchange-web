@@ -49,7 +49,7 @@ Unit test for the main components, except Chart, which is to complicated.
 yarn coverage
 ```
 
-Highlight the coverage for functions.
+## Highlight coverage for functions
 
 - OAuth login with redirection
 - Currency list with selection
