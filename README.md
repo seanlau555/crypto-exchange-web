@@ -10,7 +10,7 @@ Oauth process.
 ## Demo
 
 The published app is in Netlify.
-Url link: https://youthful-sinoussi-14eba5.netlify.app/
+Url link: https://firemessage-96e27.web.app/
 
 ## Installation
 
@@ -56,4 +56,3 @@ yarn coverage
 - Candlestick for displaying historical data.
 - Supporting multiple timeframe
 - React Hook for data query per minute.
-
